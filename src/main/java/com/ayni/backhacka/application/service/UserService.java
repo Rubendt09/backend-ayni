@@ -20,12 +20,10 @@ public class UserService {
         }
 
         User newUser = new User();
-        newUser.setName(user.getName());
-        newUser.setLastname(user.getLastname());
+        newUser.setRuc(user.getRuc());
+        newUser.setCompanyName(user.getCompanyName());
         newUser.setEmail(user.getEmail());
         newUser.setCellphone(user.getCellphone());
-        newUser.setAge(user.getAge());
-        newUser.setDni(user.getDni());
         newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         return userRepository.save(newUser);
@@ -45,9 +43,8 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
         // Solo actualizamos los campos permitidos
-        existingUser.setName(updatedUser.getName());
-        existingUser.setLastname(updatedUser.getLastname());
         existingUser.setEmail(updatedUser.getEmail());
+        existingUser.setPassword(updatedUser.getPassword());
         existingUser.setCellphone(updatedUser.getCellphone());
 
         // No se modifica ni DNI ni edad
