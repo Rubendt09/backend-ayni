@@ -11,5 +11,6 @@ public class ProductRequest {
     private double cost;
     private double price;
     private String category;
+    private String activeIngredient;
 
 }

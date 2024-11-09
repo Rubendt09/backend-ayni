@@ -27,6 +27,7 @@ public class ProductController {
                 request.getUnitOfMeasure(),
                 request.getCost(),
                 request.getPrice(),
+                request.getActiveIngredient(),
                 request.getCategory()
         );
     }
@@ -52,5 +53,11 @@ public class ProductController {
         return deletedProduct
                 .map(product -> ResponseEntity.ok("Product deleted successfully"))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/bulk-add")
+    public ResponseEntity<List<Product>> addProducts(@RequestBody List<Product> products) {
+        List<Product> savedProducts = productService.addProducts(products);
+        return ResponseEntity.ok(savedProducts);
     }
 }
